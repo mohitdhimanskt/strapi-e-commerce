@@ -14,9 +14,12 @@ export default {
   },
   async mounted() {
     try {
-      this.category = await this.$strapi.$categories.findOne(this.$route.params.id)
+       const res = await fetch(`http://localhost:1337/categories/${this.$route.params.id}`)
+      this.category = await res.json()
     } catch (error) {
-      this.error = error
+      console.log(error)
+      console.log(typeof(error))
+      // this.error = error
     }
   },
   components: {
